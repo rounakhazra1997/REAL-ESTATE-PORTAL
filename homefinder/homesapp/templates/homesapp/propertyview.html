@@ -1,0 +1,120 @@
+{% extends 'homesapp/base.html' %}
+{% block body %}
+<html>
+
+<head>
+        <style>
+                /* Set the size of the div element that contains the map */
+               #map {
+                 height: 400px;  /* The height is 400 pixels */
+                 width: 100%;  /* The width is the width of the web page */
+                }
+             </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+<div class="col-mid-3">
+    <div class="thumbnail">
+        <img src="{{property.image_url}}" height="420" width="420" align="center"></br>
+        <div class="caption">
+            <p align=center>     <font size="+2"><b>{{property.property_name}}</b></font></p>
+        </div>
+    </div>
+</div> 
+<div class="col-md-10">
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><font size="+1"><b>Property Details</b></font></div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label><b>Area SQFT</b></label>
+                                </td>
+                                <td>
+                                    {{property.area}}
+                                </td>
+                            </tr>
+                            <tr>
+                                    <td>
+                                        <label><b>Price</b></label>
+                                    </td>
+                                    <td>
+                                        {{property.price}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                            <label><b>Age</b></label>
+                                        </td>
+                                        <td>
+                                            {{property.age}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                            <td>
+                                                <label><b>No. of Floor</b></label>
+                                            </td>
+                                            <td>
+                                                {{property.floor}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>
+                                                    <label><b>Direction of House</b></label>
+                                                </td>
+                                                <td>
+                                                    {{property.direction}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                    <td>
+                                                        <label><b>Address</b></label>
+                                                    </td>
+                                                    <td>
+                                                        {{property.postadd}}
+                                                    </td>
+                                                </tr>
+                                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+</div>
+<!--map start here-->
+<div class="col-md-8">
+    <div class="thumbnail">
+        <h3>Location</h3>
+        <div id="map"></div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: {{property.lat_field}}, lng:{{property.long_field}}};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBwuz05dv5ENYbHw6M_YYS-73tK9pD3Sw&callback=initMap">
+    </script>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}
